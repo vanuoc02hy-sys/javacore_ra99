@@ -14,7 +14,7 @@ public class DemoWhile {
         while (i < 3) {
             int x = 10;
         }
-        System.out.print(x);
+//        System.out.print(x);
 
 
     }
