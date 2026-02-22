@@ -304,9 +304,9 @@ public class ThuatToan {
         System.out.println("Số năm để đạt được mục tiêu M là: " + years);
     }
 
-//    Bài 18: Một số được xem là số may mắn nếu chỉ có các chữ số 4 và 7. Cho số nguyên dương N không quá 200 chữ số.
+    //    Bài 18: Một số được xem là số may mắn nếu chỉ có các chữ số 4 và 7. Cho số nguyên dương N không quá 200 chữ số.
 //    Hãy kiểm tra xem N có phải số may mắn hay không.
-    public static void question_18(){
+    public static void question_18() {
         System.out.println("Nhập vào số nguyên dương N (không quá 200 chữ số): ");
         String N = scanner.nextLine();  // Nhập số dưới dạng chuỗi
         boolean isLucky = true;
@@ -322,6 +322,234 @@ public class ThuatToan {
         } else {
             System.out.println("Đây không phải số may mắn");
         }
+    }
+
+    //Bài 19: Viết chương trình nhập vào một xâu ký tự S có độ dài không quá 100 và chuyển xâu đã nhập thành chữ in hoa.
+    public static void question_19() {
+        System.out.println("Nhập vào một xâu ký tự S (độ dài không quá 100): ");
+        String S = scanner.nextLine();
+        while (S.length() > 100) {
+            System.out.println("Xâu ký tự quá dài, vui lòng nhập lại.");
+            S = scanner.nextLine();
+        }
+        String upperCaseS = S.toUpperCase();
+        System.out.println("Xâu ký tự sau khi chuyển thành chữ in hoa: " + upperCaseS);
+    }
+
+    //    Bài 20: Cho một xâu ký tự chỉ bao gồm các ký tự chữ cái, độ dài không quá 100. Hãy thực hiện:
+//    Biến đổi tất cả xâu thành viết thường, nếu số lượng chữ cái viết thường lớn hơn hoặc bằng số lượng chữ cái viết hoa.
+//    Biến đổi tất cả xâu thành chữ hoa, nếu số lượng chữ cái viết hoa lớn hơn số lượng chữ cái viết thường.
+    public static void question_20() {
+        System.out.println("Nhập vào một xâu ký tự (chỉ bao gồm chữ cái, độ dài không quá 100): ");
+        String input = scanner.nextLine();
+        while (input.length() > 100) {
+            System.out.println("Xâu ký tự quá dài, vui lòng nhập lại.");
+            input = scanner.nextLine();
+        }
+
+        int lowerCaseCount = 0;
+        int upperCaseCount = 0;
+
+        for (char c : input.toCharArray()) {
+            if (Character.isLowerCase(c)) {
+                lowerCaseCount++;
+            } else if (Character.isUpperCase(c)) {
+                upperCaseCount++;
+            }
+        }
+
+        String result;
+        if (lowerCaseCount >= upperCaseCount) {
+            result = input.toLowerCase();
+        } else {
+            result = input.toUpperCase();
+        }
+
+        System.out.println("Xâu ký tự sau khi biến đổi: " + result);
+    }
+
+    //    Bài 21: Viết chương trình kiểm tra xem số nguyên dương N có thỏa mãn tính chất: nếu ta lấy hai chữ số đầu
+//    và hai chữ số cuối của nó thì sẽ tạo ra số có hai chữ số giống nhau hay không?
+//    Input: là 1 số nguyên dương N có ít nhất 4 chữ số, nhưng không quá 18 chữ số.
+//    Output: Ghi ra YES hoặc NO
+    public static void question_21() {
+        System.out.println("Nhập vào số nguyên dương N (ít nhất 4 chữ số, không quá 18 chữ số): ");
+        String N = scanner.nextLine();
+        while (N.length() < 4 || N.length() > 18) {
+            System.out.println("Số không hợp lệ, vui lòng nhập lại.");
+            N = scanner.nextLine();
+        }
+
+        String firstTwoDigits = N.substring(0, 2);
+        String lastTwoDigits = N.substring(N.length() - 2);
+
+        if (firstTwoDigits.equals(lastTwoDigits)) {
+            System.out.println("YES");
+        } else {
+            System.out.println("NO");
+        }
+    }
+
+    //    Bài 22: Một số kết thúc bởi hai chữ số 86 được gọi là số phát lộc. Cho một số nguyên dương không
+//        quá 500 chữ số, hãy kiểm tra số đó có phải số phát lộc hay không.
+    public static void question_22() {
+        System.out.println("Nhập vào một số nguyên dương (không quá 500 chữ số): ");
+        String number = scanner.nextLine();
+        while (number.length() > 500) {
+            System.out.println("Số quá dài, vui lòng nhập lại.");
+            number = scanner.nextLine();
+        }
+
+        if (number.endsWith("86")) {
+            System.out.println("Đây là số phát lộc");
+        } else {
+            System.out.println("Đây không phải số phát lộc");
+        }
+    }
+
+    //    Bài 23: Viết chương trình nhập vào 3 cạnh của tam giác, kiểm tra xem đây có phải làm tam giác vuông hay không.
+//        (Áp dụng định lý pytago)
+    public static void question_23() {
+        System.out.println("Nhập vào 3 cạnh của tam giác (cách nhau bằng dấu cách): ");
+        String[] input = scanner.nextLine().split(" ");
+        while (input.length != 3) {
+            System.out.println("Vui lòng nhập đúng 3 cạnh, cách nhau bằng dấu cách.");
+            input = scanner.nextLine().split(" ");
+        }
+
+        double a = Double.parseDouble(input[0]);
+        double b = Double.parseDouble(input[1]);
+        double c = Double.parseDouble(input[2]);
+
+        // Sắp xếp các cạnh để đảm bảo cạnh lớn nhất là c
+        double[] sides = {a, b, c};
+        java.util.Arrays.sort(sides);
+        a = sides[0];
+        b = sides[1];
+        c = sides[2];
+
+        if (Math.pow(a, 2) + Math.pow(b, 2) == Math.pow(c, 2)) {
+            System.out.println("Đây là tam giác vuông");
+        } else {
+            System.out.println("Đây không phải là tam giác vuông");
+        }
+    }
+
+    //    Bài 24: Viết một chương trình Java nhận vào một mảng các số nguyên và tính trung bình cộng của các số trong mảng.
+    public static void question_24() {
+        System.out.println("Nhập vào số lượng phần tử của mảng: ");
+        int n = scanner.nextInt();
+        int[] array = new int[n];
+        System.out.println("Nhập vào các phần tử của mảng: ");
+        for (int i = 0; i < n; i++) {
+            array[i] = scanner.nextInt();
+        }
+
+        double sum = 0;
+        for (int num : array) {
+            sum += num;
+        }
+        double average = sum / n;
+        System.out.println("Trung bình cộng của các số trong mảng là: " + average);
+    }
+
+    //    Bài 25: Viết một chương trình Java nhận vào một chuỗi ký tự và đếm số lượng chữ cái (cả chữ viết hoa
+//            và chữ viết thường) trong chuỗi đó.
+    public static void question_25() {
+        System.out.println("Nhập vào một chuỗi ký tự: ");
+        String input = scanner.nextLine();
+
+        int letterCount = 0;
+        for (char c : input.toCharArray()) {
+            if (Character.isLetter(c)) {
+                letterCount++;
+            }
+        }
+
+        System.out.println("Số lượng chữ cái trong chuỗi là: " + letterCount);
+    }
+
+    //    Bài 26: Viết một chương trình Java nhận vào một mảng số nguyên và tìm tất cả các số trong mảng đó chia hết cho 3.
+//    In ra các số đó.
+    public static void question_26() {
+        System.out.println("Nhập vào số lượng phần tử của mảng: ");
+        int n = scanner.nextInt();
+        int[] array = new int[n];
+        System.out.println("Nhập vào các phần tử của mảng: ");
+        for (int i = 0; i < n; i++) {
+            array[i] = scanner.nextInt();
+        }
+
+        System.out.println("Các số chia hết cho 3 trong mảng là: ");
+        for (int num : array) {
+            if (num % 3 == 0) {
+                System.out.print(num + " ");
+            }
+        }
+        System.out.println(); // In dòng mới sau khi in xong các số
+    }
+
+    //    Bài 27: Viết một chương trình Java nhận vào một chuỗi ký tự và một ký tự cụ thể. Đếm và in ra số lần ký tự đó xuất
+//    hiện trong chuỗi.
+//    Ví dụ:
+//    Input: "banana", ký tự: 'a'
+//    Output: 3 (Ký tự 'a' xuất hiện 3 lần trong chuỗi "banana")
+    public static void question_27() {
+        System.out.println("Nhập vào một chuỗi ký tự: ");
+        String input = scanner.nextLine();
+        System.out.println("Nhập vào một ký tự cụ thể: ");
+        char character = scanner.nextLine().charAt(0);
+
+        int count = 0;
+        for (char c : input.toCharArray()) {
+            if (c == character) {
+                count++;
+            }
+        }
+
+        System.out.println("Ký tự '" + character + "' xuất hiện " + count + " lần trong chuỗi \"" + input + "\"");
+    }
+
+    //    Bài 28: Viết một chương trình Java nhận vào một chuỗi ký tự và tính tổng của tất cả các chữ số trong chuỗi đó.
+//    Các ký tự không phải chữ số sẽ bị bỏ qua.
+//    Ví dụ:
+//    Input: "a1b2c3d4"
+//    Output: 10 (Tổng của các chữ số 1, 2, 3, và 4 là 10)
+    public static void question_28() {
+        System.out.println("Nhập vào một chuỗi ký tự: ");
+        String input = scanner.nextLine();
+
+        int sum = 0;
+        for (char c : input.toCharArray()) {
+            if (Character.isDigit(c)) {
+                sum += Character.getNumericValue(c);
+            }
+        }
+
+        System.out.println("Tổng của tất cả các chữ số trong chuỗi là: " + sum);
+    }
+
+    //    Bài 29: Viết một chương trình Java nhận vào một mảng số nguyên và tính tổng của tất cả các số chẵn trong mảng.
+//    Ví dụ:
+//    Input: [3, 8, 2, 7, 10]
+//    Output: 20 (Tổng của các số chẵn là 8 + 2 + 10 = 20)
+    public static void question_29() {
+        System.out.println("Nhập vào số lượng phần tử của mảng: ");
+        int n = scanner.nextInt();
+        int[] array = new int[n];
+        System.out.println("Nhập vào các phần tử của mảng: ");
+        for (int i = 0; i < n; i++) {
+            array[i] = scanner.nextInt();
+        }
+
+        int sumEven = 0;
+        for (int num : array) {
+            if (num % 2 == 0) {
+                sumEven += num;
+            }
+        }
+
+        System.out.println("Tổng của tất cả các số chẵn trong mảng là: " + sumEven);
     }
 
 }
