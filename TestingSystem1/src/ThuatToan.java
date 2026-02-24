@@ -153,6 +153,7 @@ public class ThuatToan {
         System.out.print("Nhập cạnh 3: ");
         double c = scanner.nextDouble();
         // Kiểm tra điều kiện là tam giác (Tổng 2 cạnh sẽ lớn hơn 1 cạnh còn lại)
+        // todo
         double max = Math.max(a, Math.max(b, c));
         double sumOfSquares;
         if (max == a) {
@@ -177,10 +178,11 @@ public class ThuatToan {
         int sum = 0;
         for (int i = 2; i <= number; i++) {
             if (isPrime(i)) {
+//                System.out.println(i);
                 sum += i;
             }
         }
-        System.out.println("Tổng các số nguyên tố từ 1 tới " + number + " là : " + sum);
+        System.out.println("Tổng các số nguyên tố từ 2 tới " + number + " là : " + sum);
     }
 
     public static boolean isPrime(int number) {
@@ -222,6 +224,13 @@ public class ThuatToan {
                 System.out.println("Email không hợp lệ, vui lòng nhập lại.");
             }
         } while (!email.contains("@"));
+
+        email = scanner.nextLine();
+        while (!email.contains("@")) {
+            System.out.println("Email ko hợp lệ, mời nhập lại");
+            email = scanner.nextLine();
+        }
+
         return email;
     }
 
@@ -230,12 +239,34 @@ public class ThuatToan {
     public static String question_13() {
         String phoneNumber;
         System.out.println("Nhập vào số điện thoại (phải bắt đầu bằng số 0 và có 10 ký tự): ");
-        do {
+        phoneNumber = scanner.nextLine();
+        // C1: Sử dụng regex
+        while (!phoneNumber.matches("0\\d{9}")) {
+            System.out.println("Số điện thoại không hợp lệ, vui lòng nhập lại.");
             phoneNumber = scanner.nextLine();
-            if (!phoneNumber.matches("0\\d{9}")) {
-                System.out.println("Số điện thoại không hợp lệ, vui lòng nhập lại.");
+        }
+        //C2:
+        // Kiểm tra xem có 10 ký tự ko
+        if (phoneNumber.length() != 10){
+            System.out.println("Không hợp lệ, phải có 10 số");
+        }
+        // Kiểm tra xem, có bắt đầu bằng số 0 hay ko
+        if (phoneNumber.charAt(0) != '0'){
+            System.out.println("Không hợp lệ, phải bắt đầu bằng số 0");
+        }
+        // Kiểm tra các ký tự khác có phải là số ko
+        char[] charArray = phoneNumber.toCharArray();
+        // 0123423423 -> {'0', '1', '2'}
+        boolean checkNumber = true;
+        for (char number: charArray) {
+            if(!Character.isDigit(number)){
+                checkNumber = false;
+                break;
             }
-        } while (!phoneNumber.matches("0\\d{9}"));
+        }
+        if (!checkNumber){
+            System.out.println("Ký tự nhập vào phải là số.");
+        }
         return phoneNumber;
     }
 
@@ -264,7 +295,7 @@ public class ThuatToan {
         }
     }
 
-    //    Bài 16: Một số được gọi là số thuận nghịch độc nếu ta đọc từ trái sang phải hay từ phải sang trái
+    //    Bài 16: Một số được gọi là số thuận nghịch (độc) nếu ta đọc từ trái sang phải hay từ phải sang trái
 //    số đó ta vẫn nhận được một số giống nhau. Hãy liệt kê tất cả các số thuận nghịch độc có sáu chữ số
     public static void question_16() {
         System.out.println("Các số thuận nghịch độc có sáu chữ số là:");
@@ -274,9 +305,11 @@ public class ThuatToan {
             }
         }
     }
+    //100 001
+    // 999-100 + 1
 
     public static boolean isPalindrome(int number) {
-        String str = Integer.toString(number);
+        String str = Integer.toString(number); // 100000
         String reversedStr = new StringBuilder(str).reverse().toString();
         return str.equals(reversedStr);
     }
