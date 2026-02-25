@@ -247,24 +247,24 @@ public class ThuatToan {
         }
         //C2:
         // Kiểm tra xem có 10 ký tự ko
-        if (phoneNumber.length() != 10){
+        if (phoneNumber.length() != 10) {
             System.out.println("Không hợp lệ, phải có 10 số");
         }
         // Kiểm tra xem, có bắt đầu bằng số 0 hay ko
-        if (phoneNumber.charAt(0) != '0'){
+        if (phoneNumber.charAt(0) != '0') {
             System.out.println("Không hợp lệ, phải bắt đầu bằng số 0");
         }
         // Kiểm tra các ký tự khác có phải là số ko
         char[] charArray = phoneNumber.toCharArray();
         // 0123423423 -> {'0', '1', '2'}
         boolean checkNumber = true;
-        for (char number: charArray) {
-            if(!Character.isDigit(number)){
+        for (char number : charArray) {
+            if (!Character.isDigit(number)) {
                 checkNumber = false;
                 break;
             }
         }
-        if (!checkNumber){
+        if (!checkNumber) {
             System.out.println("Ký tự nhập vào phải là số.");
         }
         return phoneNumber;
@@ -369,6 +369,9 @@ public class ThuatToan {
         System.out.println("Xâu ký tự sau khi chuyển thành chữ in hoa: " + upperCaseS);
     }
 
+    // aAB -> ABC
+    // abC -> abc
+
     //    Bài 20: Cho một xâu ký tự chỉ bao gồm các ký tự chữ cái, độ dài không quá 100. Hãy thực hiện:
 //    Biến đổi tất cả xâu thành viết thường, nếu số lượng chữ cái viết thường lớn hơn hoặc bằng số lượng chữ cái viết hoa.
 //    Biến đổi tất cả xâu thành chữ hoa, nếu số lượng chữ cái viết hoa lớn hơn số lượng chữ cái viết thường.
@@ -382,6 +385,9 @@ public class ThuatToan {
 
         int lowerCaseCount = 0;
         int upperCaseCount = 0;
+
+        // abc -> {'a','b','c'}
+        // 124512
 
         for (char c : input.toCharArray()) {
             if (Character.isLowerCase(c)) {
@@ -411,12 +417,27 @@ public class ThuatToan {
         while (N.length() < 4 || N.length() > 18) {
             System.out.println("Số không hợp lệ, vui lòng nhập lại.");
             N = scanner.nextLine();
-        }
+            // Kiểm tra N nhập vào có phải số ko
+            // C1: Tách String thành mảng char
+            // Character.isDigit() // Đây là hàm để kiểm tra từng phần tử char có phải là số hay ko.
+            // Nếu ko phải là số -> yêu cầu nhập lại
 
+            // C2: Ép kiểu chuỗi về dạng số. Nếu lỗi -> người dùng có nhập dạng chuỗi ko phải số
+            // -> Yêu cầu nhập lại
+            long convertNumber = Long.valueOf(N);
+        }
+        //C1
         String firstTwoDigits = N.substring(0, 2);
         String lastTwoDigits = N.substring(N.length() - 2);
 
         if (firstTwoDigits.equals(lastTwoDigits)) {
+            System.out.println("YES");
+        } else {
+            System.out.println("NO");
+        }
+        // C2
+        int length = N.length();// 5
+        if (N.charAt(0) == N.charAt(length - 2) && N.charAt(1) == N.charAt(length - 1)) {
             System.out.println("YES");
         } else {
             System.out.println("NO");
@@ -432,7 +453,10 @@ public class ThuatToan {
             System.out.println("Số quá dài, vui lòng nhập lại.");
             number = scanner.nextLine();
         }
+        // C1: Dùng substring
+        String lastTwoDigits = number.substring(number.length() - 2);
 
+        // C2: dùng endsWith
         if (number.endsWith("86")) {
             System.out.println("Đây là số phát lộc");
         } else {
@@ -491,7 +515,7 @@ public class ThuatToan {
     public static void question_25() {
         System.out.println("Nhập vào một chuỗi ký tự: ");
         String input = scanner.nextLine();
-
+// 123abc
         int letterCount = 0;
         for (char c : input.toCharArray()) {
             if (Character.isLetter(c)) {

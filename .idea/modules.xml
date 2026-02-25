@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TestingSystem1/TestingSystem1.iml" filepath="$PROJECT_DIR$/TestingSystem1/TestingSystem1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TestingSystem2/TestingSystem2.iml" filepath="$PROJECT_DIR$/TestingSystem2/TestingSystem2.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/javacore_ra99.iml" filepath="$PROJECT_DIR$/.idea/javacore_ra99.iml" />
     </modules>
   </component>
