@@ -56,4 +56,47 @@ public class Exercise1 {
         }
     }
 
+    // In ra thông tin các account bao gồm: Email, FullName và tên phòng ban của họ
+    public static void question_08(Account[] accounts) {
+        // C1:
+//        for (Account account : accounts) {
+//            String email = account != null ? account.email : "";
+//            String fullName = account != null ? account.fullName : "";
+//        String departmentName = account == null || account.department == null
+//                ? "" : account.department.departmentName;
+
+//
+//            System.out.println("Email: " + email);
+//            System.out.println("FullName: " + fullName);
+//            System.out.println("Phòng ban: " + departmentName);
+//            System.out.println("___________________________");
+//        }
+//
+        // C2:
+        for (Account account : accounts) {
+            System.out.println(account);
+            System.out.println("___________________________");
+        }
+    }
+
+    public static void question_14(Account[] accounts){
+        int length = accounts != null ? accounts.length : 0;
+        for (int i = 0; i < length; i++) {
+            Account account = accounts[i];
+            if (account!=null && account.accountID < 4){
+                System.out.println(account);
+                System.out.println("___________________________");
+            }
+        }
+    }
+
+//    Question 15:
+//    In ra các số chẵn dương nhỏ hơn hoặc bằng 20
+    public static void question_15(){
+        for (int i = 0; i <= 20; i+=2) {
+            System.out.println(i);
+        }
+    }
+
+
 }

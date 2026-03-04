@@ -14,14 +14,9 @@ public class Account {
 
     @Override
     public String toString() {
-        return "modal.Account{" +
-                "accountID=" + accountID +
-                ", email='" + email + '\'' +
-                ", userName='" + userName + '\'' +
-                ", fullName='" + fullName + '\'' +
-                ", departmentID=" + department +
-                ", positionID=" + positionID +
-                ", createDate=" + createDate +
-                '}';
+        String departmentName = department != null ? department.departmentName : "";
+        return "Email: " + email + "\n" +
+                "FullName: " + fullName + "\n" +
+                "Phòng ban: " + departmentName;
     }
 }
