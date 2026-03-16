@@ -3,6 +3,7 @@ package com.vti.backend;
 import com.vti.entity.Document;
 import com.vti.ultils.ScannerUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Function implements IFunction {
@@ -54,5 +55,36 @@ public class Function implements IFunction {
     @Override
     public void viewAllDocument(List<Document> data) {
         System.out.println(data);
+    }
+
+    @Override
+    public boolean removeDocument(List<Document> data, String code) {
+        // C1: Sử dụng lamda
+//        data.removeIf(
+//                t -> code.equals(t.getCode())
+//        );
+
+        // C2: Sử dụng vòng lặp
+        for (int i = 0; i < data.size(); i++) {
+            Document document = data.get(i);
+            if (code.equals(document.getCode())) {
+                return data.remove(i) != null;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public List<Document> searchDocument(List<Document> data, String type) {
+        List<Document> result = new ArrayList<>(); // Khởi tạo danh sách mới
+
+        // Lọc từ tất cả data theo loại.
+        for (int i = 0; i < data.size(); i++) {
+            Document document = data.get(i);
+            if (type.equals(document.getType())){
+                result.add(document);
+            }
+        }
+        return result;
     }
 }

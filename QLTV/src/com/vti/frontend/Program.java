@@ -10,6 +10,7 @@ import java.util.List;
 
 public class Program {
     static List<Document> data = new ArrayList<>();
+    // Create Read Update Delete
 
     public static void main(String[] args) {
         IFunction function = new Function();
@@ -26,13 +27,20 @@ public class Program {
                     function.addDocument(data);
                     break;
                 case 2:
-                    System.out.println("Chức năng 2");
+                    System.out.println("Nhập vào mã code của tài liệu muốn xoá");
+                    String code = ScannerUtils.inputString();
+                    boolean result = function.removeDocument(data, code);
+                    System.out.println(result ? "Xoá thành công!" : "Xoá ko thành công");
                     break;
                 case 3:
                     function.viewAllDocument(data);
                     break;
                 case 4:
-                    System.out.println("Chức năng 4");
+                    System.out.println("Nhập vào loại tài liệu muốn tìm kiếm:");
+                    String type = ScannerUtils.inputString();
+                    List<Document> list = function.searchDocument(data, type);
+                    System.out.println("Danh sách các tài liệu thuộc loại " + type + " là: ");
+                    System.out.println(list);
                     break;
                 case 5:
                     System.out.println("Đã thoát!!!");
