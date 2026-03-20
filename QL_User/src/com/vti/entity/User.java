@@ -1,7 +1,11 @@
 package com.vti.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 import java.util.Date;
+
 
 public class User {
     private int id;
@@ -10,6 +14,11 @@ public class User {
     private String password;
     private String email;
     private LocalDate dob; // ngày sinh
+
+    private Department department;
+
+//    // Thông tin bổ sung
+    private String departmentName;
     private int departmentId;
 
     public int getId() {
@@ -60,11 +69,41 @@ public class User {
         this.dob = dob;
     }
 
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
     public int getDepartmentId() {
         return departmentId;
     }
 
     public void setDepartmentId(int departmentId) {
         this.departmentId = departmentId;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "id=" + id +
+                ", role=" + role +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", dob=" + dob +
+                ", departmentId=" + department +
+                ", departmentName='" + departmentName + '\'' +
+                '}';
     }
 }

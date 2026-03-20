@@ -14,4 +14,13 @@ public class UserService implements IUserService{
         // Gọi vào repository để lấy dữ liệu từ database
         return userRepository.viewAllUser();
     }
+
+    public boolean addUser() {
+        // Thực hiện logic
+        // truy vấn vào trong database để kiểm tra username có tồn tại hay ko
+
+        // chạy câu lệnh insert into
+        return true;
+    }
+
 }
