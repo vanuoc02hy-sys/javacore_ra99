@@ -16,6 +16,10 @@ public class UserController {
         return userService.viewAllUser();
     }
 
+    public  User findUserById(int id){
+        return userService.findUserById(id);
+    }
+
     public boolean addUser(User user){
         return userService.addUser(user);
     }

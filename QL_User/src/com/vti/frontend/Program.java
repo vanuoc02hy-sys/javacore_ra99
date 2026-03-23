@@ -4,7 +4,7 @@ import com.vti.utils.ScannerUtils;
 
 public class Program {
     public static void main(String[] args) {
-        menu_login();
+        menu_user();
     }
 
     public static void menu_login() {
@@ -114,9 +114,8 @@ public class Program {
                     function.viewAllUser();
                     break;
                 case 2:
-                    System.out.println("Nhập vào Id của User cần tìm:");
-                    int userId = ScannerUtils.inputNumber();
                     // xử lý tìm kiếm user theo Id
+                    function.findUserById();
                     break;
                 case 3:
                     System.out.println("Nhập từ khoá (username hoặc email):");
