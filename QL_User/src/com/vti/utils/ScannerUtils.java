@@ -50,6 +50,7 @@ public class ScannerUtils {
 
     public static String inputEmail(){
         String email = scanner.nextLine();
+
         return email;
     }
 

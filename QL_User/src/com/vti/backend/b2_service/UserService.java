@@ -3,6 +3,8 @@ package com.vti.backend.b2_service;
 import com.vti.backend.b3_repository.UserRepository;
 import com.vti.entity.User;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserService implements IUserService{
@@ -12,7 +14,18 @@ public class UserService implements IUserService{
     public List<User> viewAllUser() {
         // Thực hiện logic
         // Gọi vào repository để lấy dữ liệu từ database
-        return userRepository.viewAllUser();
+        try {
+            return userRepository.viewAllUser();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println("Lấy ra danh sách bị lỗi");
+            return new ArrayList<>();// Khi có lỗi, return danh sách trống
+        }
+    }
+
+    @Override
+    public boolean addUser(User user) {
+        return userRepository.addUser(user);
     }
 
     public boolean addUser() {

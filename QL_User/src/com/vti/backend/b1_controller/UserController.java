@@ -15,4 +15,8 @@ public class UserController {
         // -> Trả về cho giao diện sử dụng và hiển thị
         return userService.viewAllUser();
     }
+
+    public boolean addUser(User user){
+        return userService.addUser(user);
+    }
 }

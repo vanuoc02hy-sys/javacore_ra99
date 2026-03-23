@@ -1,6 +1,5 @@
 package com.vti.utils;
 
-import com.vti.entity.Department;
 import com.vti.entity.User;
 
 import java.sql.*;
@@ -8,20 +7,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JdbcUtils {
+    static Connection connection;
+
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        // B1: Tạo kết nối tới database
-        String username = "root";
-        String password = "root";
-        String url = "jdbc:mysql://localhost:3307/TestingSystem4";
-        String driver = "com.mysql.cj.jdbc.Driver";
-        Class.forName(driver);
-        Connection connection = DriverManager.getConnection(url, username, password);
-
-        demoPrepareStatement(connection);
-
+        demoPrepareStatement();
     }
 
-    public static void demoPrepareStatement(Connection connection) throws SQLException {
+    public static Connection getConnection() {
+        try {
+            String username = "root";
+            String password = "root";
+            String url = "jdbc:mysql://localhost:3307/TestingSystem4";
+            String driver = "com.mysql.cj.jdbc.Driver";
+            Class.forName(driver);
+            connection = DriverManager.getConnection(url, username, password);
+            return connection;
+        } catch (Exception e) {
+            System.err.println("Có lỗi xảy ra!");
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    public static void demoPrepareStatement() throws SQLException {
+        connection = getConnection();
         // Lấy ra 1 account / user theo 1 giá trị id cụ thể.
         // B2: Xác định câu lệnh SQL
         String sql = "SELECT * FROM Account a where a.AccountID = ?";
@@ -33,7 +42,7 @@ public class JdbcUtils {
         preparedStatement.setInt(1, id);
         // B4: Thực thi câu lệnh và hứng kết quả trả về
         ResultSet result = preparedStatement.executeQuery();
-        if (result.next()){
+        if (result.next()) {
             User user = new User();
             String email = result.getString("Email");
             String userNameSQL = result.getString("Username");
@@ -63,7 +72,7 @@ public class JdbcUtils {
         // B5: Từ kết quả --> convert thành dữ liệu java tương ứng
         // B5.1: Tạo đối tượng cần trả về cụ thể khi thực thi xong câu lệnh
         List<User> data = new ArrayList<>();
-        while (result.next()){
+        while (result.next()) {
             // B5.2 Lấy kết quả của từng hàng
             User user = new User();
 

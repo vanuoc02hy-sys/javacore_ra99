@@ -45,6 +45,7 @@ public class Program {
             switch (number) {
                 case 1:
                     // Hiển thị danh sách tất cả User và departmentName (dạng bảng)
+
                     break;
                 case 2:
                     System.out.println("Nhập Id của User cần xóa:");
@@ -96,6 +97,7 @@ public class Program {
     }
 
     public static void menu_user() {
+        Function function = new Function();
         while (true) {
             System.out.println("----------- USER MENU -------------");
             System.out.println("1. Hiển thị danh sách tất cả User (kèm departmentName)");
@@ -109,6 +111,7 @@ public class Program {
             switch (number) {
                 case 1:
                     // Hiển thị danh sách tất cả User và departmentName (dạng bảng)
+                    function.viewAllUser();
                     break;
                 case 2:
                     System.out.println("Nhập vào Id của User cần tìm:");
