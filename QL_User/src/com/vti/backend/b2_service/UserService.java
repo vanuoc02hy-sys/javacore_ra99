@@ -33,13 +33,22 @@ public class UserService implements IUserService {
             System.out.println("Lấy user bị lỗi");
             return null;// Khi có lỗi, return danh sách trống
         }
-
-
     }
 
     @Override
     public boolean addUser(User user) {
         return userRepository.addUser(user);
+    }
+
+    @Override
+    public List<User> search(String keyword) {
+        try {
+            return userRepository.findByUsernameOrEmail(keyword);
+        } catch (Exception ex){
+            ex.printStackTrace();
+            System.out.println("Có lỗi xảy ra");
+            return new ArrayList<>();
+        }
     }
 
     public boolean addUser() {

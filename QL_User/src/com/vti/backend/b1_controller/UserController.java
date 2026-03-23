@@ -23,4 +23,8 @@ public class UserController {
     public boolean addUser(User user){
         return userService.addUser(user);
     }
+
+    public List<User> search(String keyword){
+        return userService.search(keyword);
+    }
 }

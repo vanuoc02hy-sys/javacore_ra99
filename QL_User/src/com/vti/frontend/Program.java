@@ -118,9 +118,7 @@ public class Program {
                     function.findUserById();
                     break;
                 case 3:
-                    System.out.println("Nhập từ khoá (username hoặc email):");
-                    String keyword = ScannerUtils.inputString();
-                    // xử lý tìm kiếm theo username hoặc email
+                    function.search();
                     break;
 
                 case 4:

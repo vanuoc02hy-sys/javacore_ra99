@@ -10,4 +10,6 @@ public interface IUserService { // liệt kê các chức năng
     User findUserById(int id);
 
     boolean addUser(User user);
+
+    List<User> search(String keyword);
 }

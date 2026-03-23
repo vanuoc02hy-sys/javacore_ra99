@@ -28,4 +28,13 @@ public class Function {
             System.out.println("Không có kết quả trả về");
         }
     }
+
+    public void search(){
+        System.out.println("Mời bạn nhập vào từ khoá tìm kiếm");
+        String keyword = ScannerUtils.inputString();
+        List<User> userList = userController.search(keyword);
+        for (User user: userList) {
+            System.out.println(user);
+        }
+    }
 }
