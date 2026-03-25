@@ -11,6 +11,7 @@ public class User {
     private int id;
     private Role role;
     private String userName;
+    private String fullName;
     private String password;
     private String email;
     private LocalDate dob; // ngày sinh
@@ -91,6 +92,14 @@ public class User {
 
     public void setDepartmentId(int departmentId) {
         this.departmentId = departmentId;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     @Override

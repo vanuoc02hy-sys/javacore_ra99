@@ -29,6 +29,7 @@ public class Program {
     }
 
     public static void menu_admin() {
+        Function function = new Function();
         while (true) {
             System.out.println("----------- ADMIN MENU -------------");
             System.out.println("1. Hiển thị danh sách tất cả User (kèm departmentName)");
@@ -60,13 +61,7 @@ public class Program {
                     // xử lý đổi mật khẩu
                     break;
                 case 4:
-                    System.out.println("Nhập username:");
-                    String username = ScannerUtils.inputString();
-                    System.out.println("Nhập email:");
-                    String email = ScannerUtils.inputString();
-                    System.out.println("Nhập departmentId:");
-                    int departmentId = ScannerUtils.inputNumber();
-                    // xử lý thêm mới user (password = 123456, role = USER)
+                    function.createUser();
                     break;
                 case 5:
                     // Hiển thị danh sách tất cả Department (dạng bảng)

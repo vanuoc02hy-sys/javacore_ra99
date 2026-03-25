@@ -40,13 +40,6 @@ public class UserRepository {
         return data;
     }
 
-    // thêm mới user
-    public boolean addUser(User user) {
-        //B1: Kết nối tới databe
-        Connection connection = JdbcUtils.getConnection();
-        return true;
-    }
-
     public User findUserById(int id) throws SQLException {
         //B1: Kết nối tới databe
         Connection connection = JdbcUtils.getConnection();
@@ -105,5 +98,22 @@ public class UserRepository {
             userList.add(user);
         }
         return userList;
+    }
+
+    public boolean addUser(User user) throws SQLException {
+        Connection connection = JdbcUtils.getConnection();
+        // KHi thêm mới user -> cần truyền vào những tham số nào
+        String sql = "insert into Account (Email, Username, DepartmentID, passwords, CreateDate, FullName) " +
+                " VALUES (? , ? , ?, ? , ?, ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, user.getEmail());
+        preparedStatement.setString(2, user.getUserName());
+        preparedStatement.setInt(3, user.getDepartmentId());
+        preparedStatement.setString(4, user.getPassword());
+        preparedStatement.setDate(5, new Date(new java.util.Date().getTime())); // Lấy ra thời gian hiện tại java.sql.Date
+        preparedStatement.setString(6, user.getFullName());
+
+        int result = preparedStatement.executeUpdate();
+        return result > 0;
     }
 }
