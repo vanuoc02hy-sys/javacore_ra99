@@ -1,14 +1,19 @@
 package com.vti.utils;
 
+import com.vti.backend.b3_repository.DepartmentRepository;
+import com.vti.entity.Department;
+
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class ScannerUtils {
     static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main2(String[] args) {
         while (true){
             System.out.println("----------- MENU -------------");
             System.out.println("1. Thêm mới account");
@@ -67,5 +72,34 @@ public class ScannerUtils {
 
     public static int inputNumber(){
         return Integer.parseInt(scanner.nextLine()); // tránh TH bị trôi con trỏ
+    }
+
+    public static void main(String[] args) throws SQLException {
+        ScannerUtils.inputDepartmentId();
+    }
+    public static int inputDepartmentId() throws SQLException {
+        DepartmentRepository departmentRepository = new DepartmentRepository();
+        System.out.println("Mời bạn chọn id Department tương ứng");
+        List<Department> list = departmentRepository.getAllDepartment();
+        for (Department department : list) {
+            System.out.println(department.getId() + ". " + department.getDepartmentName());
+        }
+        int departmentId = ScannerUtils.inputNumber();
+        while (true){
+            boolean check = false;
+            for (Department department :list ) {
+                if (department.getId() == departmentId){
+                    check = true;
+                }
+            }
+            // sau vòng lặp for, kiểm tra giá trị id có trong ds hay ko
+            if (check){
+                break;
+            } else {
+                System.err.println("ID bạn nhập không tồn tại trong danh sách");
+                departmentId = ScannerUtils.inputNumber();
+            }
+        }
+        return departmentId;
     }
 }

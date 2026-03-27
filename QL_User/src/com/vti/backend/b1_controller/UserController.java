@@ -27,4 +27,8 @@ public class UserController {
     public List<User> search(String keyword){
         return userService.search(keyword);
     }
+
+    public User login(String password, String username) {
+        return userService.login(password, username);
+    }
 }

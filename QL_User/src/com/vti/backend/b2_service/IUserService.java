@@ -12,4 +12,6 @@ public interface IUserService { // liệt kê các chức năng
     boolean addUser(User user);
 
     List<User> search(String keyword);
+
+    User login(String password, String username);
 }

@@ -1,34 +1,33 @@
 package com.vti.frontend;
 
+import com.vti.entity.Role;
+import com.vti.entity.User;
 import com.vti.utils.ScannerUtils;
 
+import java.sql.SQLException;
+
 public class Program {
-    public static void main(String[] args) {
-        menu_user();
+    public static void main(String[] args) throws SQLException {
+        menu_login();
     }
 
-    public static void menu_login() {
+    public static void menu_login() throws SQLException {
         System.out.println("-------------- Đăng Nhập -----------------");
+        Function function = new Function();
         while (true) {
-            System.out.println("Mời bạn nhập vào username: ");
-            String username = ScannerUtils.inputString();
-            System.out.println("Mời bạn nhập vào password: ");
-            String password = ScannerUtils.inputString();
-
-            if ("admin".equals(username) && "123456".equals(password)) {
-                // Điều huơgns sang menu của admin
+            User user = function.login();
+            // đăng nhập được thành công rồi
+            // Điều hướng menu theo role người dùng
+            if (Role.ADMIN == user.getRole()){
                 menu_admin();
-            } else if ("user".equals(username) && "123456".equals(password)) {
-                // Điều hướng sang menu của user
-                menu_user();
             } else {
-                System.err.println("User hoặc mật khẩu ko chính xác. Mời nhập lại");
+                menu_user();
             }
             return;
         }
     }
 
-    public static void menu_admin() {
+    public static void menu_admin() throws SQLException {
         Function function = new Function();
         while (true) {
             System.out.println("----------- ADMIN MENU -------------");

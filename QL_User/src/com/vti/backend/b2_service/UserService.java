@@ -40,6 +40,14 @@ public class UserService implements IUserService {
         try {
             // Kiểm tra username đã tồn tại trong hệ thông chưa
             //
+            List<User> list = userRepository.findByUsernameOrEmail(user.getUserName());
+            if (list.size() > 0) {
+                System.err.println("Người dùng đã tồn tại trong hệ thống");
+                return false;
+            }
+            // thông tin email có tồn tại trong hệ thống hay ko
+            // departmentId có tồn tại trong hệ thống hay ko
+
             return userRepository.addUser(user);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -65,6 +73,16 @@ public class UserService implements IUserService {
 
         // chạy câu lệnh insert into
         return true;
+    }
+
+    public User login(String password, String username) {
+        try {
+            return userRepository.login(password, username);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+
     }
 
 }

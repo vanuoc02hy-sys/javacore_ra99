@@ -1,5 +1,6 @@
 package com.vti.backend.b3_repository;
 
+import com.vti.entity.Role;
 import com.vti.entity.User;
 import com.vti.utils.JdbcUtils;
 
@@ -12,7 +13,7 @@ public class UserRepository {
         //B1: Kết nối tới databe
         Connection connection = JdbcUtils.getConnection();
         // B2: Xác định câu lệnh SQL
-        String sql = "SELECT * FROM Account a " +
+        String sql = "SELECT * FROM User a " +
                 "join department d on a.DepartmentID = d.DepartmentID";
         // B3: Xác định đối tượng Statement tương ứng với câu lệnh
         Statement statement = connection.createStatement();
@@ -25,7 +26,7 @@ public class UserRepository {
 
             String email = result.getString("Email");
             String userNameSQL = result.getString("Username");
-            int id = result.getInt("AccountID");
+            int id = result.getInt("id");
             String departmentName = result.getString("DepartmentName");
 
             // B5.3: set các giá trị vào thuộc tính của dối tượng tương ứng
@@ -40,11 +41,12 @@ public class UserRepository {
         return data;
     }
 
+
     public User findUserById(int id) throws SQLException {
         //B1: Kết nối tới databe
         Connection connection = JdbcUtils.getConnection();
         // B2: Xác định câu lệnh SQL
-        String sql = "SELECT * FROM Account a " +
+        String sql = "SELECT * FROM User a " +
                 "join department d on a.DepartmentID = d.DepartmentID where a.AccountId = ?";
         // B3: Xác định đối tượng Statement tương ứng với câu lệnh
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -73,7 +75,7 @@ public class UserRepository {
     public List<User> findByUsernameOrEmail(String keyword) throws SQLException {
         keyword = "%" + keyword + "%";
         Connection connection = JdbcUtils.getConnection();
-        String sql = "SELECT * FROM Account a " +
+        String sql = "SELECT * FROM User a " +
                 "join department d on a.DepartmentID = d.DepartmentID " +
                 " where a.Username like ? or a.Email like ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -86,7 +88,7 @@ public class UserRepository {
             User user = new User();
             String email = result.getString("Email");
             String userName = result.getString("Username");
-            int id = result.getInt("AccountID");
+            int id = result.getInt("id");
             String departmentName = result.getString("DepartmentName");
 
             // B5.3: set các giá trị vào thuộc tính của dối tượng tương ứng
@@ -103,7 +105,7 @@ public class UserRepository {
     public boolean addUser(User user) throws SQLException {
         Connection connection = JdbcUtils.getConnection();
         // KHi thêm mới user -> cần truyền vào những tham số nào
-        String sql = "insert into Account (Email, Username, DepartmentID, passwords, CreateDate, FullName) " +
+        String sql = "insert into User (Email, Username, DepartmentID, password, CreateDate, FullName) " +
                 " VALUES (? , ? , ?, ? , ?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, user.getEmail());
@@ -115,5 +117,26 @@ public class UserRepository {
 
         int result = preparedStatement.executeUpdate();
         return result > 0;
+    }
+
+    public User login(String password, String username) throws SQLException {
+        Connection connection = JdbcUtils.getConnection();
+        String sql = "select * from User where password = ? and Username =? ";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, password);
+        preparedStatement.setString(2, username);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            // Tạo đối tượng user để reutrn
+            User user = new User();
+            user.setUserName(resultSet.getString("userName"));
+            // Các thông tin khác
+            String roleStr = resultSet.getString("role"); // USER
+            Role role = Role.valueOf(roleStr);
+            user.setRole(role);
+            return user;
+        } else {
+            return null;
+        }
     }
 }

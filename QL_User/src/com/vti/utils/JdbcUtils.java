@@ -17,7 +17,7 @@ public class JdbcUtils {
         try {
             String username = "root";
             String password = "root";
-            String url = "jdbc:mysql://localhost:3307/TestingSystem4";
+            String url = "jdbc:mysql://localhost:3307/VTI";
             String driver = "com.mysql.cj.jdbc.Driver";
             Class.forName(driver);
             connection = DriverManager.getConnection(url, username, password);
