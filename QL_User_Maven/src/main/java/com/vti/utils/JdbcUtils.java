@@ -2,27 +2,33 @@ package com.vti.utils;
 
 import com.vti.entity.User;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class JdbcUtils {
     static Connection connection;
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
-//        demoPrepareStatement();
-        int[] numberArray = {1,2};
-        for (int i = 0; i <= numberArray.length ; i++) {
-            System.out.println(numberArray[i]);
-        }
+        getConnection();
+//        int[] numberArray = {1,2};
+//        for (int i = 0; i <= numberArray.length ; i++) {
+//            System.out.println(numberArray[i]);
+//        }
     }
 
     public static Connection getConnection() {
         try {
-            String username = "root";
-            String password = "root";
-            String url = "jdbc:mysql://localhost:3307/VTI";
-            String driver = "com.mysql.cj.jdbc.Driver";
+            Properties propertiesFile = new Properties();
+            propertiesFile.load(new FileInputStream("QL_User_Maven/src/main/resources/config.properties"));
+
+            String username = propertiesFile.getProperty("user");
+            String password = propertiesFile.getProperty("password");
+            String url = propertiesFile.getProperty("url");
+            String driver = propertiesFile.getProperty("driver");
             Class.forName(driver);
             connection = DriverManager.getConnection(url, username, password);
             return connection;

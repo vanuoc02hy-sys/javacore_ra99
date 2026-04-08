@@ -10,7 +10,9 @@ public class Program {
     static Function function = new Function();
 
     public static void main(String[] args) throws SQLException {
-        menu_login();
+        final int number = 1;
+        System.out.println(number);
+        menu_user();
     }
 
     public static void menu_login() throws SQLException {

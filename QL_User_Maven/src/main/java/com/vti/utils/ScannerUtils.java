@@ -14,15 +14,15 @@ public class ScannerUtils {
     static Scanner scanner = new Scanner(System.in);
 
     public static void main2(String[] args) {
-        while (true){
+        while (true) {
             System.out.println("----------- MENU -------------");
             System.out.println("1. Thêm mới account");
             System.out.println("2. Chỉnh sửa account");
             System.out.println("3. Xoá account");
             System.out.println("4. Danh sách account");
             System.out.println("5. Thoát");
-            int number = ScannerUtils.inputNumber(1,5);
-            switch (number){
+            int number = ScannerUtils.inputNumber(1, 5);
+            switch (number) {
                 case 1:
                     System.out.println("Chức năng1");
                     break;
@@ -53,22 +53,14 @@ public class ScannerUtils {
         return number;
     }
 
-    public static String inputEmail(){
-        String email = scanner.nextLine();
-
-        return email;
-    }
-
-    public static String inputString(){
+    public static String inputString() {
         return scanner.nextLine();
     }
 
     public static Date inputDate() throws ParseException {
         int number1 = 100;
         long number2 = 1000;
-        int number3 = (int)number2;
-
-
+        int number3 = (int) number2;
 
 
         System.out.println("Nhập vào giá trị ngày có định dạng: dd-MM-yyyy HH:mm:ss");
@@ -77,13 +69,14 @@ public class ScannerUtils {
         return formatter2.parse(dateStr2);
     }
 
-    public static int inputNumber(){
+    public static int inputNumber() {
         return Integer.parseInt(scanner.nextLine()); // tránh TH bị trôi con trỏ
     }
 
     public static void main(String[] args) throws SQLException {
         ScannerUtils.inputDepartmentId();
     }
+
     public static int inputDepartmentId() throws SQLException {
         DepartmentRepository departmentRepository = new DepartmentRepository();
         System.out.println("Mời bạn chọn id Department tương ứng");
@@ -92,15 +85,15 @@ public class ScannerUtils {
             System.out.println(department.getId() + ". " + department.getDepartmentName());
         }
         int departmentId = ScannerUtils.inputNumber();
-        while (true){
+        while (true) {
             boolean check = false;
-            for (Department department :list ) {
-                if (department.getId() == departmentId){
+            for (Department department : list) {
+                if (department.getId() == departmentId) {
                     check = true;
                 }
             }
             // sau vòng lặp for, kiểm tra giá trị id có trong ds hay ko
-            if (check){
+            if (check) {
                 break;
             } else {
                 System.err.println("ID bạn nhập không tồn tại trong danh sách");
@@ -108,5 +101,57 @@ public class ScannerUtils {
             }
         }
         return departmentId;
+    }
+
+    public static String inputEmail() {
+        // chuỗi có chứa chữ @ sẽ là hợp lệ
+        while (true) {
+            String email = ScannerUtils.inputString();
+//            if (email.contains("@") && email.contains(".")){
+//                return email;
+//            } else {
+//                System.out.println("email ko hợp lệ, mời nhập lại");
+//            }
+            String regexEmail = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+            if (email.matches(regexEmail)) {
+                return email;
+            } else
+                System.out.println("email ko hợp lệ, mời nhập lại");
+        }
+    }
+
+    public static String inputEmailV2() {
+        // chuỗi có chứa chữ @ sẽ là hợp lệ
+        String email = ScannerUtils.inputString();
+        String regexEmail = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        while (!email.matches(regexEmail)) {
+            System.out.println("email ko hợp lệ, mời nhập lại");
+            email = ScannerUtils.inputString();
+        }
+        return email;
+    }
+
+    //Password: nhập từ 6 tới 12 ký tự, || 2có ít nhất 1 ký tự viết hoa
+    public static String inputPassword() {
+        while (true) {
+            String password = ScannerUtils.inputString();
+            if (password.length() < 6 || password.length() > 12) {
+                System.out.println("pw phải từ 6-12 ký tự, mời nhập lại!");
+                continue;
+            }
+            // có ít nhất 1 ký tự viết hoa
+            boolean hasUppercase = false;
+            for (char c : password.toCharArray()) {
+                if (Character.isUpperCase(c)) {
+                    hasUppercase = true;
+                    break;
+                }
+            }
+            if (!hasUppercase) {
+                System.out.println("pw phải có ít nhất 1 chữ viết hoa");
+                continue;
+            }
+            return password;
+        }
     }
 }

@@ -3,7 +3,6 @@ package com.vti.backend.b2_service;
 import com.vti.backend.b3_repository.UserRepository;
 import com.vti.entity.User;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,6 +47,12 @@ public class UserService implements IUserService {
             }
             // thông tin email có tồn tại trong hệ thống hay ko
             // departmentId có tồn tại trong hệ thống hay ko
+
+            // add Department
+//            for (user user : allUser){
+//                traLuong(id);
+//            }
+
 
             return userRepository.addUser(user);
         } catch (Exception ex) {
