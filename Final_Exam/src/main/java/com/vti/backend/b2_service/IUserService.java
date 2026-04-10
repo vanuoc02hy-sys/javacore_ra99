@@ -6,13 +6,9 @@ import java.util.List;
 
 public interface IUserService { // liệt kê các chức năng
 
-    List<User> viewAllUser();
+    List<User> findAllEmployeeByProjectId(int projectId);
 
-    User findUserById(int id);
-
-    boolean addUser(User user);
-
-    List<User> search(String keyword);
+    List<User> findAllManager();
 
     User login(String password, String username);
 }

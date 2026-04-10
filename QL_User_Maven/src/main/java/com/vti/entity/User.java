@@ -1,5 +1,7 @@
 package com.vti.entity;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 
@@ -14,7 +16,7 @@ public class User {
 
     private Department department;
 
-//    // Thông tin bổ sung
+    //    // Thông tin bổ sung
     private String departmentName;
     private int departmentId;
 
